@@ -6,3 +6,4 @@ mmls          show different partition
 dd if=<filename> of=<output file> bs=<block sizes> skip=<where to start> count=<size of the file you wanna partition>
 fls -r <file>               to show all dir within partition
 icat <file> <r number of the file u wanna download> > <file you wanna download from that Rnumber> 
+printf '<HEX_BYTES_TO_INSERT>' | dd of=<TARGET_FILE> bs=<BLOCK_SIZE> count=<NUM_BYTES> conv=<MODE>        patch the beginning of a file by replacing a specific number of starting bytes with custom hex values \x##(hexbyte), for surgical file patches, always use bs=1. count = The total number of bytes you are inserting/overwriting. conv = The default action of dd is to truncate the file; notrunc overrides this.
