@@ -1,0 +1,90 @@
+kφ = e*d - 1
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ nc saturn.picoctf.net 51509
+anger = 19895969265067187363485932397748144261106070231639604180732972331379719041683
+envy = 48375392710001741195628487468947646231267085028280758319634137104772123482113
+vainglory?
+>
+
+=>kφ = 3170378112035384112737904183252421891058550951498436057993862443435450656647239680
+use https://www.alpertron.com.ar/ECM.HTM to find factor
+factor = 2^11 × 3^2 × 5 × 13^2 × 47 × 79 × 277 × 3643 × 1888213 × 2324317 × 3407803829 × 26470708040477 × 137224454884003321519974683033
+
+
+
+                                                                                                                                        
+# save as recover_pride.py
+from Crypto.Util.number import long_to_bytes
+from math import prod
+import itertools
+
+e = 65537
+ct = 19895969265067187363485932397748144261106070231639604180732972331379719041683
+d = 48375392710001741195628487468947646231267085028280758319634137104772123482113
+
+# If you computed kphi earlier, paste it here (optional)
+kphi = e * d - 1
+print("kphi =", kphi)
+
+# paste the factorization you got from Alpertron below as a string
+# Example: "2^10 × 3 × 5 × 7^2 × 13 ..."
+factors_in = input("Paste factorization from Alpertron (use ^ and ×):\n> ").strip()
+
+def parse_pow(x):
+    r = x.split('^')
+    if len(r) == 1:
+        return [int(r[0])]
+    else:
+        return [int(r[0])] * int(r[1])
+
+factors = sum([parse_pow(x.strip().replace(' ', '')) for x in factors_in.split('×')], [])
+
+# heuristics from your original script:
+pfac = factors[-1]    # largest prime factor -> used in p-1
+qfac = factors[-2]    # second largest -> used in q-1
+factors = factors[:-2]
+# remove two 2's that must belong to p-1 and q-1
+factors.remove(2)
+factors.remove(2)
+
+T127 = 2**127
+T129 = 2**129
+pts = set()
+for c in itertools.product([0,1,2], repeat=len(factors)):
+    h     =            prod(factors[i] for i, x in enumerate(c) if x == 0)
+    psub1 = 2 * pfac * prod(factors[i] for i, x in enumerate(c) if x == 1)
+    qsub1 = 2 * qfac * prod(factors[i] for i, x in enumerate(c) if x == 2)
+    if h < e and T127 < psub1 < T129 and T127 < qsub1 < T129:
+        n = (psub1 + 1) * (qsub1 + 1)
+        pt = long_to_bytes(pow(ct, d, n))
+        if len(pt) == 16:
+            pts.add(pt)
+            print("found plaintext:", pt)
+
+print("all candidates:", pts)
+
+
+(venv)─(kali㉿lto)-[~/Downloads/picoctf]
+└─$ python3 solve.py 
+kphi = 3170378112035384112737904183252421891058550951498436057993862443435450656647239680
+Paste factorization from Alpertron (use ^ and ×):
+> 2^11 × 3^2 × 5 × 13^2 × 47 × 79 × 277 × 3643 × 1888213 × 2324317 × 3407803829 × 26470708040477 × 137224454884003321519974683033
+
+found plaintext: b'ylr1zkXr6OZU7NDl'
+found plaintext: b'ylr1zkXr6OZU7NDl'
+found plaintext: b'ylr1zkXr6OZU7NDl'
+
+=>> plaintext = ylr1zkXr6OZU7NDl
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ nc saturn.picoctf.net 51509
+anger = 19895969265067187363485932397748144261106070231639604180732972331379719041683
+envy = 48375392710001741195628487468947646231267085028280758319634137104772123482113
+vainglory?
+> ylr1zkXr6OZU7NDl
+ylr1zkXr6OZU7NDl
+Conquered!
+picoCTF{7h053_51n5_4r3_n0_m0r3_0795e891}
+
+
+                                                                                                                                                                                                                                                                                                  
+
