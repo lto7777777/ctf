@@ -1,0 +1,49 @@
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ nc mercury.picoctf.net 30568
+Here is the alphabet: 0fkdwu6rp8zvsnlj3iytxmeh72ca9bg5o41q
+Here is the encrypted message: herfayo7oqxrz7jwxx15ie20p40u1i
+What is the plaintext message?
+
+
+
+#!/usr/bin/env python3
+
+SQUARE_SIZE = 6
+
+alphabet = '0fkdwu6rp8zvsnlj3iytxmeh72ca9bg5o41q'
+ciphertext = 'herfayo7oqxrz7jwxx15ie20p40u1i'
+
+def generate_square(alpha):
+    matrix = []
+    for i in range(0, len(alpha), SQUARE_SIZE):
+        matrix.append(list(alpha[i:i+SQUARE_SIZE]))
+    return matrix
+
+def build_index(matrix):
+    idx = {}
+    for r in range(SQUARE_SIZE):
+        for c in range(SQUARE_SIZE):
+            idx[matrix[r][c]] = (r, c)
+    return idx
+
+def decrypt_pair(a, b, matrix, index):
+    r1, c1 = index[a]
+    r2, c2 = index[b]
+
+    if r1 == r2:  # same row -> shift left
+        return matrix[r1][(c1 - 1) % SQUARE_SIZE] + matrix[r2][(c2 - 1) % SQUARE_SIZE]
+    elif c1 == c2:  # same column -> shift up
+        return matrix[(r1 - 1) % SQUARE_SIZE][c1] + matrix[(r2 - 1) % SQUARE_SIZE][c2]
+    else:  # rectangle rule
+        return matrix[r1][c2] + matrix[r2][c1]
+
+def decrypt(text, matrix, index):
+    plaintext = ''
+    for i in range(0, len(text), 2):
+        plaintext += decrypt_pair(text[i], text[i+1], matrix, index)
+    return plaintext
+
+matrix = generate_square(alphabet)
+index = build_index(matrix)
+plaintext = decrypt(ciphertext, matrix, index)
+print("Decrypted plaintext:", plaintext)
