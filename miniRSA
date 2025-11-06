@@ -1,0 +1,50 @@
+#!/usr/bin/env python3
+# RSA low-exponent (e=3) attack when m^e < N
+# Usage: edit ciphertext (c), exponent (e), and modulus (N) if needed.
+
+def find_integer_root(n, e):
+    """Return the integer e-th root of n (floor root)."""
+    a, b = 0, 1 << ((n.bit_length() + e - 1) // e + 2)
+    while b - a > 1:
+        mid = (a + b) // 2
+        if pow(mid, e) > n:
+            b = mid
+        else:
+            a = mid
+    if pow(a, e) == n:
+        return a
+    elif pow(b, e) == n:
+        return b
+    else:
+        return a
+
+def rsa_low_exponent_decrypt(c, e=3, N=None):
+    """
+    Decrypts RSA ciphertext if m^e < N (no modular reduction happened).
+    If N is provided, this only works if c < N and m^e < N.
+    """
+    m = find_integer_root(c, e)
+    if pow(m, e) != c:
+        print("[!] Warning: Not an exact e-th power — result may be truncated.")
+
+    # Convert integer message to bytes
+    hx = hex(m)[2:]
+    if len(hx) % 2:
+        hx = "0" + hx
+    plaintext_bytes = bytes.fromhex(hx)
+
+    try:
+        plaintext = plaintext_bytes.decode("utf-8")
+    except UnicodeDecodeError:
+        plaintext = plaintext_bytes
+
+    return plaintext
+
+if __name__ == "__main__":
+    # Example usage — replace 'c' with your ciphertext integer
+    c = int(input("Enter ciphertext (integer): ").strip())
+    e = int(input("Enter exponent e : "))
+
+    plaintext = rsa_low_exponent_decrypt(c, e)
+    print("\\n[+] Decrypted message:")
+    print(plaintext)
