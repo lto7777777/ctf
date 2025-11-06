@@ -1,0 +1,57 @@
+https://www.alpertron.com.ar/ECM.HTM
+put n in there and find the euler ( delete all space). that phi.
+
+
+#!/usr/bin/env python3
+# rsa_decrypt_prompt.py
+# Simple interactive RSA decryptor using known phi(n).
+
+from binascii import unhexlify
+
+def egcd(a, b):
+    if a == 0:
+        return (b, 0, 1)
+    else:
+        g, y, x = egcd(b % a, a)
+        return (g, x - (b // a) * y, y)
+
+def modinv(a, m):
+    g, x, y = egcd(a, m)
+    if g != 1:
+        raise Exception('Modular inverse does not exist')
+    return x % m
+
+def int_from_input(prompt):
+    """Accept decimal or hex input (0x...)."""
+    val = input(prompt).strip()
+    if val.startswith("0x") or val.startswith("0X"):
+        return int(val, 16)
+    return int(val)
+
+def main():
+    print("=== RSA Decryptor (given φ) ===")
+    c = int_from_input("Enter ciphertext (C): ")
+    n = int_from_input("Enter modulus (N): ")
+    e = int_from_input("Enter exponent (e): ")
+    phi = int_from_input("Enter phi(n): ")
+    print("\n[*] Computing private exponent d = e^-1 mod phi ...")
+
+    d = modinv(e, phi)
+    print(f"[*] Computed d = {d}\n")
+
+    m = pow(c, d, n)
+    m_bytes = m.to_bytes((m.bit_length() + 7) // 8, "big")
+
+    print("[*] Decryption complete.")
+    try:
+        text = m_bytes.decode("utf-8")
+        print("\n=== Decrypted plaintext (UTF-8) ===")
+        print(text)
+    except UnicodeDecodeError:
+        print("\n[!] Not valid UTF-8. Showing hex instead:")
+        print(m_bytes.hex())
+
+    print("\nSaved result in memory only (you can copy it above).")
+
+if __name__ == "__main__":
+    main()
