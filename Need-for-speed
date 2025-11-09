@@ -1,0 +1,78 @@
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ chmod +x need-for-speed
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ ./need-for-speed
+
+Keep this thing over 50 mph!
+============================
+
+Creating key...
+Not fast enough. BOOM!
+
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ cp need-for-speed patched
+
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ r2 -w patched
+
+WARN: Relocs has not been applied. Please use `-e bin.relocs.apply=true` or `-e bin.cache=true` next time
+[0x00000660]> e bin.relocs.apply=true
+[0x00000660]> aa
+INFO: Analyze all flags starting with sym. and entry0 (aa)
+INFO: Analyze imports (af@@@i)
+INFO: Analyze entrypoint (af@ entry0)
+INFO: Analyze symbols (af@@@s)
+INFO: Recovering variables (afva@@@F)
+INFO: Analyze all functions arguments/locals (afva@@@F)
+[0x00000660]> afl~calculate_key
+0x000007f1    3     29 sym.calculate_key
+[0x00000660]> s sym.calculate_key
+[0x000007f1]> pdf
+            ; CALL XREF from sym.get_key @ 0x892(x)
+┌ 29: sym.calculate_key ();
+│ afv: vars(1:sp[0xc..0xc])
+│           0x000007f1      55             push rbp
+│           0x000007f2      4889e5         mov rbp, rsp
+│           0x000007f5      c745fc401a..   mov dword [var_4h], 0xd4801a40
+│       ┌─> 0x000007fc      836dfc01       sub dword [var_4h], 1
+│       ╎   0x00000800      817dfc200d..   cmp dword [var_4h], 0xea400d20
+│       └─< 0x00000807      75f3           jne 0x7fc
+│           0x00000809      8b45fc         mov eax, dword [var_4h]
+│           0x0000080c      5d             pop rbp
+└           0x0000080d      c3             ret
+
+[0x000007f1]> s 0x000007f5
+[0x000007f5]> wa mov dword [rbp-0x4], 0xea400d21
+INFO: Written 7 byte(s) (mov dword [rbp-0x4], 0xea400d21) = wx c745fc210d40ea @ 0x000007f5
+[0x000007f5]> s sym.calculate_key
+[0x000007f1]> pdf
+            ; CALL XREF from sym.get_key @ 0x892(x)
+┌ 29: sym.calculate_key ();
+│ afv: vars(1:sp[0xc..0xc])
+│           0x000007f1      55             push rbp
+│           0x000007f2      4889e5         mov rbp, rsp
+│           0x000007f5      c745fc210d..   mov dword [var_4h], 0xea400d21
+│       ┌─> 0x000007fc      836dfc01       sub dword [var_4h], 1
+│       ╎   0x00000800      817dfc200d..   cmp dword [var_4h], 0xea400d20
+│       └─< 0x00000807      75f3           jne 0x7fc
+│           0x00000809      8b45fc         mov eax, dword [var_4h]
+│           0x0000080c      5d             pop rbp
+└           0x0000080d      c3             ret
+[0x000007f1]> wq
+ERROR: Invalid `q` subcommand, try `w?`
+[0x000007f1]> w
+ERROR: Invalid ` ` subcommand, try `w?`
+[0x000007f1]> q
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ chmod +x patched
+./patched
+Keep this thing over 50 mph!
+============================
+
+Creating key...
+Finished
+Printing flag:
+PICOCTF{Good job keeping bus #1f2ac4ec speeding along!}
