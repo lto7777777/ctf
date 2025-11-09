@@ -1,0 +1,120 @@
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ wget https://jupiter.challenges.picoctf.org/static/c52816dbe0b91283b5459fc828150a1c/mystery    
+--2025-11-09 14:04:28--  https://jupiter.challenges.picoctf.org/static/c52816dbe0b91283b5459fc828150a1c/mystery
+Resolving jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)... 3.131.60.8
+Connecting to jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)|3.131.60.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 13104 (13K) [application/octet-stream]
+Saving to: ‘mystery’
+
+mystery                                                                  100%[================================================================================================================================================================================>]  12.80K  --.-KB/s    in 0s      
+
+2025-11-09 14:04:29 (528 MB/s) - ‘mystery’ saved [13104/13104]
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ wget https://jupiter.challenges.picoctf.org/static/c52816dbe0b91283b5459fc828150a1c/Item01_cp.bmp
+--2025-11-09 14:04:36--  https://jupiter.challenges.picoctf.org/static/c52816dbe0b91283b5459fc828150a1c/Item01_cp.bmp
+Resolving jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)... 3.131.60.8
+Connecting to jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)|3.131.60.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1507414 (1.4M) [application/octet-stream]
+Saving to: ‘Item01_cp.bmp’
+
+Item01_cp.bmp                                                            100%[================================================================================================================================================================================>]   1.44M  1.19MB/s    in 1.2s    
+
+2025-11-09 14:04:38 (1.19 MB/s) - ‘Item01_cp.bmp’ saved [1507414/1507414]
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ wget https://jupiter.challenges.picoctf.org/static/c52816dbe0b91283b5459fc828150a1c/Item02_cp.bmp
+--2025-11-09 14:04:42--  https://jupiter.challenges.picoctf.org/static/c52816dbe0b91283b5459fc828150a1c/Item02_cp.bmp
+Resolving jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)... 3.131.60.8
+Connecting to jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)|3.131.60.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1507414 (1.4M) [application/octet-stream]
+Saving to: ‘Item02_cp.bmp’
+
+Item02_cp.bmp                                                            100%[================================================================================================================================================================================>]   1.44M   614KB/s    in 2.4s    
+
+2025-11-09 14:04:45 (614 KB/s) - ‘Item02_cp.bmp’ saved [1507414/1507414]
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ wget https://jupiter.challenges.picoctf.org/static/c52816dbe0b91283b5459fc828150a1c/Item03_cp.bmp
+--2025-11-09 14:04:48--  https://jupiter.challenges.picoctf.org/static/c52816dbe0b91283b5459fc828150a1c/Item03_cp.bmp
+Resolving jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)... 3.131.60.8
+Connecting to jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)|3.131.60.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1507414 (1.4M) [application/octet-stream]
+Saving to: ‘Item03_cp.bmp’
+
+Item03_cp.bmp                                                            100%[================================================================================================================================================================================>]   1.44M  1.16MB/s    in 1.2s    
+
+2025-11-09 14:04:50 (1.16 MB/s) - ‘Item03_cp.bmp’ saved [1507414/1507414]
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ wget https://jupiter.challenges.picoctf.org/static/c52816dbe0b91283b5459fc828150a1c/Item04_cp.bmp
+--2025-11-09 14:04:56--  https://jupiter.challenges.picoctf.org/static/c52816dbe0b91283b5459fc828150a1c/Item04_cp.bmp
+Resolving jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)... 3.131.60.8
+Connecting to jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)|3.131.60.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1507414 (1.4M) [application/octet-stream]
+Saving to: ‘Item04_cp.bmp’
+
+Item04_cp.bmp                                                            100%[================================================================================================================================================================================>]   1.44M  1.16MB/s    in 1.2s    
+
+2025-11-09 14:04:58 (1.16 MB/s) - ‘Item04_cp.bmp’ saved [1507414/1507414]
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ wget https://jupiter.challenges.picoctf.org/static/c52816dbe0b91283b5459fc828150a1c/Item05_cp.bmp
+--2025-11-09 14:05:02--  https://jupiter.challenges.picoctf.org/static/c52816dbe0b91283b5459fc828150a1c/Item05_cp.bmp
+Resolving jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)... 3.131.60.8
+Connecting to jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)|3.131.60.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1507414 (1.4M) [application/octet-stream]
+Saving to: ‘Item05_cp.bmp’
+
+Item05_cp.bmp                                                            100%[================================================================================================================================================================================>]   1.44M   997KB/s    in 1.5s    
+
+2025-11-09 14:05:05 (997 KB/s) - ‘Item05_cp.bmp’ saved [1507414/1507414]
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ nano solve.py
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ chmod +x solve.py 
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ python3 solve.py
+Flag: picoCTF{N1c3_R3ver51ng_5k1115_00000000000f9d605bf}
+
+
+
+
+# For more details about how this script works, see "Investigative Reversing 2/script.py".
+
+from pwn import unbits
+
+bin_str = ""
+for i in range(5, 0, -1):
+    with open("Item0{}_cp.bmp".format(i), "rb") as b:
+        b.seek(2019)
+        # just like the encoding script, we loop 100 times.
+        for j in range(50):
+            # read the byte from the flag from 8 bytes of the image using LSB-encoding
+            if (j % 5 == 0):
+                for k in range(8):
+                    byte = ord(b.read(1))
+                    bit = byte & 1 # the LSB
+                    bin_str += str(bit)
+            # after reading the byte of the flag, read 4 bytes of normal image data
+            else:
+                b.read(1)
+
+char_str = unbits(bin_str, endian='little')
+print("Flag: {}".format(char_str.decode("ascii")))
