@@ -1,0 +1,212 @@
+                                    
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ nc mercury.picoctf.net 33425
+Here is the flag:
+bfcb060d03f4949f62383fbcd9f60e9b11b26318893f555d10b5c0ad7b5d29daf3c49f0e2d4a3902
+What data would you like to encrypt? 13371337
+7c4b2db0cbdf7b66
+What data would you like to encrypt?
+
+
+                                                                                                                                                                                                                                                                                                
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ nano sv.py
+
+import binascii
+
+from Crypto.Cipher import DES
+
+from tqdm import tqdm
+
+
+
+padding = "  "
+
+encrypted_flag = binascii.unhexlify("bfcb060d03f4949f62383fbcd9f60e9b11b26318893f555d10b5c0ad7b5d29daf3c49f0e2d4a3902")
+
+
+
+def pad(msg):
+
+    block_len = 8
+
+    over = len(msg) % block_len
+
+    pad = block_len - over
+
+    return (msg + " " * pad).encode()
+
+
+
+custom_known_text = pad(binascii.unhexlify("13371337").decode())
+
+custom_ciphertext = binascii.unhexlify("7c4b2db0cbdf7b66")
+
+
+
+encrypt_table = {}
+
+for key in tqdm(range(999999), desc="Bruteforcing 1st Key"):
+
+    key = (f"{key:06}" + padding).encode()
+
+    cipher = DES.new(key, DES.MODE_ECB)
+
+    encrypted_custom = cipher.encrypt(custom_known_text)
+
+    encrypt_table[encrypted_custom] = key
+
+
+
+decrypt_table = {}
+
+for key in tqdm(range(999999), desc="Bruteforcing 2nd Key"):
+
+    key = (f"{key:06}" + padding).encode()
+
+    cipher = DES.new(key, DES.MODE_ECB)
+
+    decrypted_custom = cipher.decrypt(custom_ciphertext)
+
+    decrypt_table[decrypted_custom] = key
+
+
+
+print("Finding Key Intersection...")
+
+encrypt_table_set = set(encrypt_table.keys())
+
+decrypt_table_set = set(decrypt_table.keys())
+
+for encrypt_decrypt_value in encrypt_table_set.intersection(decrypt_table_set):
+
+    encrypt_key = encrypt_table[encrypt_decrypt_value]
+
+    decrypt_key = decrypt_table[encrypt_decrypt_value]
+
+    break
+
+print("1st Key Found: %s" % encrypt_key)
+
+print("2nd Key Found: %s" % decrypt_key)
+
+
+
+cipher1 = DES.new(encrypt_key, DES.MODE_ECB)
+
+cipher2 = DES.new(decrypt_key, DES.MODE_ECB)
+
+flag_intermediate = cipher2.decrypt(encrypted_flag)
+
+flag = cipher1.decrypt(flag_intermediate).decode()
+
+print("Flag: %s" % flag)
+
+
+(kali㉿lto)-[~/Downloads/picoctf]
+└─$ source venv/bin/activate 
+
+                                                                                                                                                                                                                                                                                               
+┌──(venv)─(kali㉿lto)-[~/Downloads/picoctf]
+└─$ chmod +x sv.py    
+                                                                                                                                                                                                                                                                                                  
+┌──(venv)─(kali㉿lto)-[~/Downloads/picoctf]
+└─$ python3 sv.py 
+Bruteforcing 1st Key: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 999999/999999 [00:07<00:00, 131899.64it/s]
+Bruteforcing 2nd Key: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 999999/999999 [00:07<00:00, 128920.44it/s]
+Finding Key Intersection...
+1st Key Found: b'355315  '
+2nd Key Found: b'355999  '
+Flag: af5fa5d565081bac320f42feaf69b405  
+
+
+
+import binascii
+
+from Crypto.Cipher import DES
+
+from tqdm import tqdm
+
+
+
+padding = "  "
+
+encrypted_flag = binascii.unhexlify("bfcb060d03f4949f62383fbcd9f60e9b11b26318893f555d10b5c0ad7b5d29daf3c49f0e2d4a3902")
+
+
+
+def pad(msg):
+
+    block_len = 8
+
+    over = len(msg) % block_len
+
+    pad = block_len - over
+
+    return (msg + " " * pad).encode()
+
+
+
+custom_known_text = pad(binascii.unhexlify("13371337").decode())
+
+custom_ciphertext = binascii.unhexlify("7c4b2db0cbdf7b66")
+
+
+
+encrypt_table = {}
+
+for key in tqdm(range(999999), desc="Bruteforcing 1st Key"):
+
+    key = (f"{key:06}" + padding).encode()
+
+    cipher = DES.new(key, DES.MODE_ECB)
+
+    encrypted_custom = cipher.encrypt(custom_known_text)
+
+    encrypt_table[encrypted_custom] = key
+
+
+
+decrypt_table = {}
+
+for key in tqdm(range(999999), desc="Bruteforcing 2nd Key"):
+
+    key = (f"{key:06}" + padding).encode()
+
+    cipher = DES.new(key, DES.MODE_ECB)
+
+    decrypted_custom = cipher.decrypt(custom_ciphertext)
+
+    decrypt_table[decrypted_custom] = key
+
+
+
+print("Finding Key Intersection...")
+
+encrypt_table_set = set(encrypt_table.keys())
+
+decrypt_table_set = set(decrypt_table.keys())
+
+for encrypt_decrypt_value in encrypt_table_set.intersection(decrypt_table_set):
+
+    encrypt_key = encrypt_table[encrypt_decrypt_value]
+
+    decrypt_key = decrypt_table[encrypt_decrypt_value]
+
+    break
+
+print("1st Key Found: %s" % encrypt_key)
+
+print("2nd Key Found: %s" % decrypt_key)
+
+
+
+cipher1 = DES.new(encrypt_key, DES.MODE_ECB)
+
+cipher2 = DES.new(decrypt_key, DES.MODE_ECB)
+
+flag_intermediate = cipher2.decrypt(encrypted_flag)
+
+flag = cipher1.decrypt(flag_intermediate).decode()
+
+print("Flag: %s" % flag)
