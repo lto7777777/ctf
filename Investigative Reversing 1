@@ -1,0 +1,164 @@
+                                                                                                                                                                                                                                                                                                 
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ wget https://jupiter.challenges.picoctf.org/static/c600f6c1bbe8969aefd6f9da0cbdc01c/mystery
+--2025-11-09 23:41:51--  https://jupiter.challenges.picoctf.org/static/c600f6c1bbe8969aefd6f9da0cbdc01c/mystery
+Resolving jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)... 3.131.60.8
+Connecting to jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)|3.131.60.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 16712 (16K) [application/octet-stream]
+Saving to: ‘mystery’
+
+mystery                                                                  100%[================================================================================================================================================================================>]  16.32K  --.-KB/s    in 0s      
+
+2025-11-09 23:41:52 (196 MB/s) - ‘mystery’ saved [16712/16712]
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ wget https://jupiter.challenges.picoctf.org/static/c600f6c1bbe8969aefd6f9da0cbdc01c/mystery.png
+--2025-11-09 23:41:57--  https://jupiter.challenges.picoctf.org/static/c600f6c1bbe8969aefd6f9da0cbdc01c/mystery.png
+Resolving jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)... 3.131.60.8
+Connecting to jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)|3.131.60.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 125059 (122K) [application/octet-stream]
+Saving to: ‘mystery.png’
+
+mystery.png                                                              100%[================================================================================================================================================================================>] 122.13K   223KB/s    in 0.5s    
+
+2025-11-09 23:41:59 (223 KB/s) - ‘mystery.png’ saved [125059/125059]
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ wget https://jupiter.challenges.picoctf.org/static/c600f6c1bbe8969aefd6f9da0cbdc01c/mystery2.png
+--2025-11-09 23:42:04--  https://jupiter.challenges.picoctf.org/static/c600f6c1bbe8969aefd6f9da0cbdc01c/mystery2.png
+Resolving jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)... 3.131.60.8
+Connecting to jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)|3.131.60.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 125045 (122K) [application/octet-stream]
+Saving to: ‘mystery2.png’
+
+mystery2.png                                                             100%[================================================================================================================================================================================>] 122.11K   269KB/s    in 0.5s    
+
+2025-11-09 23:42:05 (269 KB/s) - ‘mystery2.png’ saved [125045/125045]
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ wget https://jupiter.challenges.picoctf.org/static/c600f6c1bbe8969aefd6f9da0cbdc01c/mystery3.png
+--2025-11-09 23:42:10--  https://jupiter.challenges.picoctf.org/static/c600f6c1bbe8969aefd6f9da0cbdc01c/mystery3.png
+Resolving jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)... 3.131.60.8
+Connecting to jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)|3.131.60.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 125051 (122K) [application/octet-stream]
+Saving to: ‘mystery3.png’
+
+mystery3.png                                                             100%[================================================================================================================================================================================>] 122.12K   200KB/s    in 0.6s    
+
+2025-11-09 23:42:13 (200 KB/s) - ‘mystery3.png’ saved [125051/125051]
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ chmod +x mystery 
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ file mystery
+mystery: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=1b08f7a782a77a6eeb80d7c1d621b4f16f76200a, not stripped
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ xxd -g 1 mystery.png | tail
+0001e7f0: 82 20 08 82 20 08 82 20 08 82 20 64 1f 32 12 21  . .. .. .. d.2.!
+0001e800: 08 82 20 08 82 20 08 82 20 08 42 f6 21 23 11 82  .. .. .. .B.!#..
+0001e810: 20 08 82 20 08 82 20 08 82 20 64 1f 32 12 21 08   .. .. .. d.2.!.
+0001e820: 82 20 08 82 20 08 82 20 08 42 f6 21 23 11 82 20  . .. .. .B.!#.. 
+0001e830: 08 82 20 08 82 20 08 82 20 64 1f 32 12 21 08 82  .. .. .. d.2.!..
+0001e840: 20 08 82 20 08 82 20 08 42 f6 21 23 11 82 20 08   .. .. .B.!#.. .
+0001e850: 82 20 08 82 20 08 82 20 64 17 ff ef ff fd 7f 5e  . .. .. d......^
+0001e860: ed 5a 9d 38 d0 1f 56 00 00 00 00 49 45 4e 44 ae  .Z.8..V....IEND.
+0001e870: 42 60 82 43 46 7b 41 6e 31 5f 39 61 34 37 31 34  B`.CF{An1_9a4714
+0001e880: 31 7d 60                                         1}`
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ xxd -g 1 mystery2.png | tail
+0001e7e0: 21 08 82 20 08 82 20 08 82 20 08 42 f6 21 23 11  !.. .. .. .B.!#.
+0001e7f0: 82 20 08 82 20 08 82 20 08 82 20 64 1f 32 12 21  . .. .. .. d.2.!
+0001e800: 08 82 20 08 82 20 08 82 20 08 42 f6 21 23 11 82  .. .. .. .B.!#..
+0001e810: 20 08 82 20 08 82 20 08 82 20 64 1f 32 12 21 08   .. .. .. d.2.!.
+0001e820: 82 20 08 82 20 08 82 20 08 42 f6 21 23 11 82 20  . .. .. .B.!#.. 
+0001e830: 08 82 20 08 82 20 08 82 20 64 1f 32 12 21 08 82  .. .. .. d.2.!..
+0001e840: 20 08 82 20 08 82 20 08 42 f6 21 23 11 82 20 08   .. .. .B.!#.. .
+0001e850: 82 20 08 82 20 08 82 20 64 17 ff ef ff fd 7f 5e  . .. .. d......^
+0001e860: ed 5a 9d 38 d0 1f 56 00 00 00 00 49 45 4e 44 ae  .Z.8..V....IEND.
+0001e870: 42 60 82 85 73                                   B`..s
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ xxd -g 1 mystery3.png | tail
+0001e7e0: 21 08 82 20 08 82 20 08 82 20 08 42 f6 21 23 11  !.. .. .. .B.!#.
+0001e7f0: 82 20 08 82 20 08 82 20 08 82 20 64 1f 32 12 21  . .. .. .. d.2.!
+0001e800: 08 82 20 08 82 20 08 82 20 08 42 f6 21 23 11 82  .. .. .. .B.!#..
+0001e810: 20 08 82 20 08 82 20 08 82 20 64 1f 32 12 21 08   .. .. .. d.2.!.
+0001e820: 82 20 08 82 20 08 82 20 08 42 f6 21 23 11 82 20  . .. .. .B.!#.. 
+0001e830: 08 82 20 08 82 20 08 82 20 64 1f 32 12 21 08 82  .. .. .. d.2.!..
+0001e840: 20 08 82 20 08 82 20 08 42 f6 21 23 11 82 20 08   .. .. .B.!#.. .
+0001e850: 82 20 08 82 20 08 82 20 64 17 ff ef ff fd 7f 5e  . .. .. d......^
+0001e860: ed 5a 9d 38 d0 1f 56 00 00 00 00 49 45 4e 44 ae  .Z.8..V....IEND.
+0001e870: 42 60 82 69 63 54 30 74 68 61 5f                 B`.icT0tha_
+
+
+
+
+                                                                                                                                                                                                                                                                                                 
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ nano sc.py    
+
+
+# Extracted appended data based on your xxd output
+D1 = bytes.fromhex("43467b416e315f396134373134317d60") # mystery.png (16 bytes)
+D2 = bytes.fromhex("8573") # mystery2.png (2 bytes)
+D3 = bytes.fromhex("696354307468615f") # mystery3.png (8 bytes)
+
+# Initialize the 26-byte flag buffer
+flag = [0] * 26
+
+# --- Reassembly and Decoding ---
+
+# Flag[0] - Written to D2[0] as Flag[0] + 0x15. Reverse: subtract 0x15.
+flag[0] = D2[0] - 0x15
+
+# Flag[1] - Written to D3[0] directly.
+flag[1] = D3[0]
+
+# Flag[2] - Written to D3[1] directly.
+flag[2] = D3[1]
+
+# Flag[3] - Written to D2[1] as Flag[3] + 4. Reverse: subtract 4.
+flag[3] = D2[1] - 4
+
+# Flag[4] - Written to D1[0] directly.
+flag[4] = D1[0]
+
+# Flag[5] - Written to D3[2] directly.
+flag[5] = D3[2]
+
+# Flag[6] to Flag[9] - Written to D1[1] to D1[4] directly.
+for i in range(4):
+    flag[6 + i] = D1[1 + i]
+
+# Flag[10] to Flag[14] - Written to D3[3] to D3[7] directly.
+for i in range(5):
+    flag[10 + i] = D3[3 + i]
+
+# Flag[15] to Flag[25] - Written to D1[5] to D1[15] directly.
+for i in range(11):
+    flag[15 + i] = D1[5 + i]
+
+# Convert list of byte values back to a string
+final_flag = "".join([chr(byte) for byte in flag])
+print(final_flag)
+
+
+                                                                                                                                                                                                                                                                                                 
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ chmod +x sc.py
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ python3 sc.py 
+picoCTF{An0tha_1_9a47141}`
+                           
