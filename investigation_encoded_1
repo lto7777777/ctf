@@ -1,0 +1,127 @@
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ wget https://jupiter.challenges.picoctf.org/static/e3904a8bf9fc321ffbe9360271067ecd/mystery
+--2025-11-09 23:19:42--  https://jupiter.challenges.picoctf.org/static/e3904a8bf9fc321ffbe9360271067ecd/mystery
+Resolving jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)... 3.131.60.8
+Connecting to jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)|3.131.60.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 13368 (13K) [application/octet-stream]
+Saving to: ‘mystery’
+
+mystery                                                                  100%[================================================================================================================================================================================>]  13.05K  --.-KB/s    in 0s      
+
+2025-11-09 23:19:43 (537 MB/s) - ‘mystery’ saved [13368/13368]
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ https://jupiter.challenges.picoctf.org/static/e3904a8bf9fc321ffbe9360271067ecd/output
+zsh: no such file or directory: https://jupiter.challenges.picoctf.org/static/e3904a8bf9fc321ffbe9360271067ecd/output
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ wget https://jupiter.challenges.picoctf.org/static/e3904a8bf9fc321ffbe9360271067ecd/output 
+--2025-11-09 23:19:51--  https://jupiter.challenges.picoctf.org/static/e3904a8bf9fc321ffbe9360271067ecd/output
+Resolving jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)... 3.131.60.8
+Connecting to jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)|3.131.60.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 22 [application/octet-stream]
+Saving to: ‘output’
+
+output                                                                   100%[================================================================================================================================================================================>]      22  --.-KB/s    in 0s      
+
+2025-11-09 23:19:52 (21.3 MB/s) - ‘output’ saved [22/22]
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ file mystery
+mystery: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=29b4dba83a1a5a26d76e122ad48d63cff886b075, not stripped
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ file output
+output: Non-ISO extended-ASCII text, with no line terminators
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ xxd -g 1 output
+00000000: 8e 8e ba 3b b8 ea 23 a8 a3 b8 ab 8b a2 a8 bb b8  ...;..#.........
+00000010: eb 8e a3 ba 8e a0                                ......
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ chmod +x mystery 
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ ./mystery
+./flag.txt not found
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ echo test>flag.txt
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ ./mystery         
+Error, I don't know why I crashed
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ echo -n test>flag.txt
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ ./mystery            
+I'm Done, check ./output
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ xxd -g 1 output
+00000000: e2 2a 38                                         .*8
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ xxd -b -c1 output | cut -d" " -f2 | tr -d "\n"
+111000100010101000111000                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$     
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ wget https://jupiter.challenges.picoctf.org/static/e3904a8bf9fc321ffbe9360271067ecd/output
+--2025-11-09 23:23:49--  https://jupiter.challenges.picoctf.org/static/e3904a8bf9fc321ffbe9360271067ecd/output
+Resolving jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)... 3.131.60.8
+Connecting to jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)|3.131.60.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 22 [application/octet-stream]
+Saving to: ‘output’
+
+output                                                                   100%[================================================================================================================================================================================>]      22  --.-KB/s    in 0s      
+
+2025-11-09 23:23:50 (31.6 MB/s) - ‘output’ saved [22/22]
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ xxd -b -c1 output | cut -d" " -f2 | tr -d "\n"                                            
+10001110100011101011101000111011101110001110101000100011101010001010001110111000101010111000101110100010101010001011101110111000111010111000111010100011101110101000111010100000                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ nano sv.py
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ nano sv.py
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ chmod +x sv.py   
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ python3 sv.py      
+encodedimvrhjkdzd
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ 
+
+
+
+
+import sys
+
+d = {'11101110101000': 'z', '101110101000': 'l', '111010111000': 'k', '101011101000': 'f', '1010101000': 'h', '1010111000': 'u', '11101000': 'n', '10111000': 'a', '111011101000': 'g', '101010111000': 'v', '111010101000': 'b', '10101000': 's', '10111011101000': 'p', '101110111000': 'w', '11101011101000': 'c', '1110111010111000': 'q', '111000': 't', '1110111000': 'm', '1110101000': 'd', '11101110111000': 'o', '11101010111000': 'x', '1011101110111000': 'j', '1011101000': 'r', '1110101110111000': 'y', '101000': 'i', '1000': 'e', '0000': ' '}
+buf = ""
+# `xxd -b -c1 output | cut -d" " -f2 | tr -d "\n"`
+secret = "10001110100011101011101000111011101110001110101000100011101010001010001110111000101010111000101110100010101010001011101110111000111010111000111010100011101110101000111010100000"
+while len(secret) > 0:
+    buf += secret[0]
+    secret = secret[1:]
+    if buf in d:
+        sys.stdout.write(d[buf])
+        buf = ""
+
+sys.stdout.write('\n')
