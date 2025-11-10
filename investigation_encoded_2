@@ -1,0 +1,341 @@
+                                                                                                                                                                                                                                                                                                 
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ wget https://jupiter.challenges.picoctf.org/static/c09444bcd3737284f3c046e700f2b7de/mystery
+--2025-11-09 23:28:20--  https://jupiter.challenges.picoctf.org/static/c09444bcd3737284f3c046e700f2b7de/mystery
+Resolving jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)... 3.131.60.8
+Connecting to jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)|3.131.60.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 14008 (14K) [application/octet-stream]
+Saving to: ‘mystery’
+
+mystery                                                                  100%[================================================================================================================================================================================>]  13.68K  --.-KB/s    in 0s      
+
+2025-11-09 23:28:21 (480 MB/s) - ‘mystery’ saved [14008/14008]
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ wget https://jupiter.challenges.picoctf.org/static/c09444bcd3737284f3c046e700f2b7de/output 
+--2025-11-09 23:28:27--  https://jupiter.challenges.picoctf.org/static/c09444bcd3737284f3c046e700f2b7de/output
+Resolving jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)... 3.131.60.8
+Connecting to jupiter.challenges.picoctf.org (jupiter.challenges.picoctf.org)|3.131.60.8|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 58 [application/octet-stream]
+Saving to: ‘output’
+
+output                                                                   100%[================================================================================================================================================================================>]      58  --.-KB/s    in 0s      
+
+2025-11-09 23:28:28 (64.8 MB/s) - ‘output’ saved [58/58]
+
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ chmod +x mystery 
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ ./mystery
+Error: file ./flag.txt not found
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ echo abcde>flag.txt
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ ./mystery
+zsh: segmentation fault  ./mystery
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ nano dict.c
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ r2 -A mystery
+WARN: Relocs has not been applied. Please use `-e bin.relocs.apply=true` or `-e bin.cache=true` next time
+INFO: Analyze all flags starting with sym. and entry0 (aa)
+INFO: Analyze imports (af@@@i)
+INFO: Analyze entrypoint (af@ entry0)
+INFO: Analyze symbols (af@@@s)
+INFO: Analyze all functions arguments/locals (afva@@@F)
+INFO: Analyze function calls (aac)
+INFO: Analyze len bytes of instructions for references (aar)
+INFO: Finding and parsing C++ vtables (avrr)
+INFO: Analyzing methods (af @@ method.*)
+INFO: Recovering local variables (afva@@@F)
+INFO: Type matching analysis for all functions (aaft)
+INFO: Propagate noreturn information (aanr)
+INFO: Use -AA or aaaa to perform additional experimental analysis
+[0x00000ae0]> bf obj.secret
+[0x00000ae0]> pc @ obj.secret
+#define _BUFFER_SIZE 71
+const uint8_t buffer[_BUFFER_SIZE] = {
+  0x8b, 0xaa, 0x2e, 0xee, 0xe8, 0xbb, 0xae, 0x8e, 0xbb, 0xae,
+  0x3a, 0xee, 0x8e, 0xee, 0xa8, 0xee, 0xae, 0xe3, 0xaa, 0xe3,
+  0xae, 0xbb, 0x8b, 0xae, 0xb8, 0xea, 0xae, 0x2e, 0xba, 0x2e,
+  0xae, 0x8a, 0xee, 0xa3, 0xab, 0xa3, 0xbb, 0xbb, 0x8b, 0xbb,
+  0xb8, 0xae, 0xee, 0x2a, 0xee, 0x2e, 0x2a, 0xb8, 0xaa, 0x8e,
+  0xaa, 0x3b, 0xaa, 0x3b, 0xba, 0x8e, 0xa8, 0xeb, 0xa3, 0xa8,
+  0xaa, 0x28, 0xbb, 0xb8, 0xae, 0x2a, 0xe2, 0xee, 0x3a, 0xb8,
+  0x00
+};
+[0x00000ae0]> bf obj.indexTable
+[0x00000ae0]> pc @ obj.indexTable
+#define _BUFFER_SIZE 152
+const uint8_t buffer[_BUFFER_SIZE] = {
+  0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x12, 0x00,
+  0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x3c, 0x00, 0x00, 0x00,
+  0x52, 0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x78, 0x00,
+  0x00, 0x00, 0x8e, 0x00, 0x00, 0x00, 0x9e, 0x00, 0x00, 0x00,
+  0xb4, 0x00, 0x00, 0x00, 0xc8, 0x00, 0x00, 0x00, 0xda, 0x00,
+  0x00, 0x00, 0xea, 0x00, 0x00, 0x00, 0xfc, 0x00, 0x00, 0x00,
+  0x0e, 0x01, 0x00, 0x00, 0x1e, 0x01, 0x00, 0x00, 0x34, 0x01,
+  0x00, 0x00, 0x48, 0x01, 0x00, 0x00, 0x5a, 0x01, 0x00, 0x00,
+  0x6a, 0x01, 0x00, 0x00, 0x72, 0x01, 0x00, 0x00, 0x80, 0x01,
+  0x00, 0x00, 0x8c, 0x01, 0x00, 0x00, 0x9a, 0x01, 0x00, 0x00,
+  0xaa, 0x01, 0x00, 0x00, 0xbc, 0x01, 0x00, 0x00, 0xc8, 0x01,
+  0x00, 0x00, 0xd6, 0x01, 0x00, 0x00, 0xe0, 0x01, 0x00, 0x00,
+  0xea, 0x01, 0x00, 0x00, 0xf0, 0x01, 0x00, 0x00, 0x00, 0x02,
+  0x00, 0x00, 0x0a, 0x02, 0x00, 0x00, 0x16, 0x02, 0x00, 0x00,
+  0x22, 0x02, 0x00, 0x00, 0x30, 0x02, 0x00, 0x00, 0x34, 0x02,
+  0x00, 0x00
+};
+[0x00000ae0]> q
+
+
+                                                                                                                                                                                                                                                                                                
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ cc dict.c -o dict && ./dict
+dict.c: In function ‘getValue’:
+dict.c:111:28: warning: right shift count >= width of type [-Wshift-count-overflow]
+  111 |     bVar1 = (byte)(param_1 >> 0x37);
+      |                            ^~
+a: 101011101110111000
+b: 1010101110111000
+c: 10111000
+d: 10101010111000
+e: 101010101000
+f: 11101010101000
+g: 1110111010101000
+h: 111011101110101000
+i: 111010101000
+j: 11101011101000
+k: 1110101000
+l: 1010101000
+m: 101000
+n: 1011101110111000
+o: 1010111000
+p: 101010111000
+q: 101110111000
+r: 11101010111000
+s: 1000
+t: 10111010101000
+u: 1011101110111011101000
+v: 10111011101011101000
+w: 1110101110111010111000
+x: 111010111011101000
+y: 11101110111010101000
+z: 1110111010101110111000
+0: 1110101010111000
+1: 1110101110101110111000
+2: 10111010111010111000
+3: 111010101010111000
+4: 1011101011101000
+5: 101110101011101000
+6: 101011101110101000
+7: 1110101011101000
+8: 1110111011101110111000
+9: 10111011101110111000
+ : 0000
+
+
+
+                                                                                                                                                                                                                                                                                                 
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ nano decode.py    
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ chmod +x decode.py
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ python3 decode.py 
+[+] Starting local process './dict': pid 15648
+[+] Receiving all data: Done (712B)
+[*] Process './dict' stopped with exit code 0 (pid 15648)
+[*] Binary data loaded.
+[+] Output: t1m3f1i3500000000000f9ee1180
+                                                                                                                                                                                                                                                                                                  
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ 
+
+
+
+dict.c
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <assert.h>
+
+// Definitions from Ghidra
+typedef unsigned char    byte;
+typedef unsigned int     uint;
+typedef unsigned long    ulong;
+
+// Global Data Structures (Source: Radare2/Ghidra Dumps)
+// Note: This C code relies on the system being Little-Endian (x86-64)
+
+const uint8_t secret[] = {
+  0x8b, 0xaa, 0x2e, 0xee, 0xe8, 0xbb, 0xae, 0x8e, 0xbb, 0xae,
+  0x3a, 0xee, 0x8e, 0xee, 0xa8, 0xee, 0xae, 0xe3, 0xaa, 0xe3,
+  0xae, 0xbb, 0x8b, 0xae, 0xb8, 0xea, 0xae, 0x2e, 0xba, 0x2e,
+  0xae, 0x8a, 0xee, 0xa3, 0xab, 0xa3, 0xbb, 0xbb, 0x8b, 0xbb,
+  0xb8, 0xae, 0xee, 0x2a, 0xee, 0x2e, 0x2a, 0xb8, 0xaa, 0x8e,
+  0xaa, 0x3b, 0xaa, 0x3b, 0xba, 0x8e, 0xa8, 0xeb, 0xa3, 0xa8,
+  0xaa, 0x28, 0xbb, 0xb8, 0xae, 0x2a, 0xe2, 0xee, 0x3a, 0xb8,
+  0x00
+};
+
+const uint8_t indexTable[] = {
+  0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x12, 0x00,
+  0x00, 0x00, 0x28, 0x00, 0x00, 0x00, 0x3c, 0x00, 0x00, 0x00,
+  0x52, 0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x78, 0x00,
+  0x00, 0x00, 0x8e, 0x00, 0x00, 0x00, 0x9e, 0x00, 0x00, 0x00,
+  0xb4, 0x00, 0x00, 0x00, 0xc8, 0x00, 0x00, 0x00, 0xda, 0x00,
+  0x00, 0x00, 0xea, 0x00, 0x00, 0x00, 0xfc, 0x00, 0x00, 0x00,
+  0x0e, 0x01, 0x00, 0x00, 0x1e, 0x01, 0x00, 0x00, 0x34, 0x01,
+  0x00, 0x00, 0x48, 0x01, 0x00, 0x00, 0x5a, 0x01, 0x00, 0x00,
+  0x6a, 0x01, 0x00, 0x00, 0x72, 0x01, 0x00, 0x00, 0x80, 0x01,
+  0x00, 0x00, 0x8c, 0x01, 0x00, 0x00, 0x9a, 0x01, 0x00, 0x00,
+  0xaa, 0x01, 0x00, 0x00, 0xbc, 0x01, 0x00, 0x00, 0xc8, 0x01,
+  0x00, 0x00, 0xd6, 0x01, 0x00, 0x00, 0xe0, 0x01, 0x00, 0x00,
+  0xea, 0x01, 0x00, 0x00, 0xf0, 0x01, 0x00, 0x00, 0x00, 0x02,
+  0x00, 0x00, 0x0a, 0x02, 0x00, 0x00, 0x16, 0x02, 0x00, 0x00,
+  0x22, 0x02, 0x00, 0x00, 0x30, 0x02, 0x00, 0x00, 0x34, 0x02,
+  0x00, 0x00
+};
+
+// Function Prototypes
+ulong getValue(int param_1);
+void encode(char c);
+
+// --- FUNCTION DEFINITIONS ---
+
+ulong getValue(int param_1)
+{
+  byte bVar1;
+  int iVar2;
+
+  iVar2 = param_1;
+  if (param_1 < 0) {
+    iVar2 = param_1 + 7;
+  }
+  bVar1 = (byte)(param_1 >> 0x37);
+  return (ulong)((int)(uint)(byte)secret[iVar2 >> 3] >>
+                 (7 - (((char)param_1 + (bVar1 >> 5) & 7) - (bVar1 >> 5)) & 0x1f) & 1);
+}
+
+void encode(char c)
+{
+  byte bVar1;
+  ulong uVar2;
+  int iVar3;
+  int local_10;
+  char current_char = c;
+
+  // Character Transformation Logic
+  if (current_char == ' ') {
+    current_char = -0x7b; // Maps space to a specific encoded value
+  }
+  else {
+    if (('/' < current_char) && (current_char < ':')) {
+      current_char = current_char + 'K'; // Maps digits '0'-'9' to 'a'-'j' range
+    }
+  }
+
+  current_char = current_char + -0x61; // Normalizes to 0-based offset (0-25 for 'a'-'z')
+  if ((current_char < '\0') || ('$' < current_char)) { // '$' = 36 (Check if normalized index is valid)
+    return;
+  }
+
+  printf("%c: ", c);
+
+  // Mapping based on indexTable
+  if (current_char != '$') { // Skip if character is the normalized equivalent of ' '
+    iVar3 = ((int)current_char + 0x12) % 0x24; // Permutation logic
+    bVar1 = (byte)(iVar3 >> 0x1f);
+    current_char = ((byte)iVar3 ^ bVar1) - bVar1; // Final index calculation
+  }
+
+  // Get Start Index and End Index from indexTable
+  local_10 = *(int *)(indexTable + (long)(int)current_char * 4);
+  iVar3 = *(int *)(indexTable + (long)((int)current_char + 1) * 4);
+
+  // Generate and Print Bitstream
+  while (local_10 < iVar3) {
+    uVar2 = getValue(local_10);
+    printf("%d", uVar2);
+    local_10 = local_10 + 1;
+  }
+  printf("\n");
+  return;
+}
+
+// --- MAIN FUNCTION ---
+
+int main(int argc, char* argv[])
+{
+  char c;
+
+  // Encode lowercase letters
+  for (c = 'a'; c <= 'z'; c++)
+  {
+    encode(c);
+  }
+
+  // Encode digits
+  for (c = '0'; c <= '9'; c++)
+  {
+    encode(c);
+  }
+
+  // Encode space
+  encode(' ');
+
+  return 0;
+}
+
+
+
+decode.py
+
+
+from pwn import *
+
+p = process("./dict")
+# FIX APPLIED HERE: Decode the byte output into a string ('ascii')
+dict_output = p.recvall().rstrip().decode('ascii')
+
+encoding_dict = {}
+# Now that dict_output is a string, splitting by a string works correctly
+for line in dict_output.split("\n"):
+    line = line.rstrip()
+    if ": " in line:
+        char, encoding = line.split(": ")
+        encoding_dict[encoding] = char.strip()
+
+with open("output", "rb") as f:
+    data = f.read()
+    bin_data = bits_str(data)
+    log.info("Binary data loaded.")
+    res = ""
+    while bin_data:
+        # Sort keys by length in reverse order (longest codes checked first)
+        for k in sorted(encoding_dict.keys(), key=len, reverse=True): 
+            if bin_data.startswith(k):
+                res += encoding_dict[k]
+                bin_data = bin_data[len(k):]
+                break
+        else:
+            # Code to handle remaining padding/errors
+            if (bin_data.rstrip("0") != ""):
+                log.error("Can't find decoded value for {}".format(bin_data))
+                raise Exception()
+            break
+            
+    log.success("Output: {}".format(res))
+                                          
